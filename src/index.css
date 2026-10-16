@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --color-paper: #f3ecdf;
+  --color-cream: #fffaf3;
+  --color-ink: #1a140f;
+  --color-muted: #6d5f52;
+  --color-line: #e5d5c2;
+  --color-forest: #1b140f;
+  --color-canopy: #9a4d22;
+  --color-mist: #f6e7d2;
+  --color-marigold: #e7a11a;
+  --color-marigold-deep: #c4840a;
+  --color-clay: #8d3d32;
+  --color-blush: #f8ebe6;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+  color-scheme: light;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  overflow-x: clip;
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(rgba(243, 236, 223, 0.9), rgba(243, 236, 223, 0.94)),
+    url("/bus-hero.jpg");
+  background-position: center;
+  background-size: cover;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+::selection {
+  background: #f3d7b0;
+  color: #1c2430;
+}
+
+.field {
+  @apply h-12 w-full rounded-xl border border-line bg-cream px-3.5 text-sm text-ink outline-none transition placeholder:text-muted/70 focus:border-canopy focus:ring-4 focus:ring-canopy/15;
+}
+
+.field[aria-invalid="true"] {
+  @apply border-clay focus:border-clay focus:ring-clay/15;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.65;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.94);
+  }
+  70% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.55s ease both;
+}
+
+.animate-pop {
+  animation: pop 0.22s ease;
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.14) translate3d(-2%, -1.5%, 0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes draw {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.animate-kenburns {
+  animation: kenburns 22s ease-in-out infinite alternate;
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+.animate-draw {
+  animation: draw 1.15s ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-rise,
+  .animate-pop,
+  .animate-kenburns,
+  .animate-float,
+  .animate-draw,
+  .reveal-block {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@media print {
+  nav,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  body,
+  #root {
+    background: white !important;
+  }
+}
